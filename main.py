@@ -1,12 +1,14 @@
 import append
 import read_file as rf
+import Word
+import draw_word
 
 def main() -> None:
     print('Made By 镜梦')
     
-    check = rf.check()
-    say = ('','有单词文件缺失','单词文件与统计个数文件长度不统一')
-    if check == 1 or check == 2:
+    check: int = rf.check()
+    say = ('', '有单词文件缺失', '单词文件与统计个数文件长度不统一', '', '文件格式错误')
+    if check == 1 or check == 2 or check == 4:
         inp = input(say[check]+'，是否直接初始化所有单词数据（N/Y）：')
         if inp == 'Y':
             rf.init()
@@ -18,23 +20,31 @@ def main() -> None:
             rf.choose()
         else:
             return
-    file = rf.read()
+    wb: Word.WordBook = rf.read()
     
     inp = ''
     while inp != '0':
         print('''
         选择模式：
-        1.修改/显示单词本
-        0.退出
+        1. 修改/显示单词本
+        2. 抽取单词
+        0. 退出
         ''')
         inp = input('>>>')
         if inp == '0':
             break
         elif inp == '1':
-            interrupt = append.main(file)
+            interrupt = append.main(wb)
             if interrupt:
                 break
-
+        elif inp == '2':
+            if wb.all_fre == 0:
+                print('当前还没有任何单词哦，请添加后重试')
+                input('按Enter后重新输入...')
+            else:
+                draw_word.main(wb)
+        else:
+            input('错误输入，按Enter后重新输入...')
 
 if __name__ == '__main__':
     main()

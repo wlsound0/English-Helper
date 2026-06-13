@@ -1,3 +1,5 @@
+import Word
+
 def init() -> None:
     with open('words.txt', 'w'):
         pass
@@ -11,10 +13,11 @@ def check() -> int:
     1 文件缺失
     2 单词与统计个数长度不统一
     3 有重复单词
+    4 文件格式错误
     """
     try:
-        words = []
-        nums = []
+        words: list[str] = []
+        nums: list[str] = []
         with open('words.txt', 'r') as f:
             for i in f:
                 words.append(i.strip())
@@ -28,26 +31,32 @@ def check() -> int:
         for i in words:
             if words.count(i) != 1:
                 return 3
+        for i in nums:
+            try:
+                a = int(i)
+            except ValueError:
+                return 4
     except FileNotFoundError:
         return 1
     return 0
 
-def read() -> dict:
+def read() -> Word.WordBook:
     # 读取
-    words = []
+    words: list[str] = []
     with open('words.txt', 'r') as f:
         for word in f:
             words.append(word.strip())
-    nums = []
+    nums: list[int]  = []
     with open('nums.txt', 'r') as f:
         for num in f:
             nums.append(int(num.strip()))
-    re = {}
+    re: Word.WordBook = Word.WordBook()
     for i in range(len(words)):
-        re[words[i]] = nums[i]
+        new_word: Word.Word = Word.Word(words[i], nums[i])
+        re.push(new_word)
     return re
         
-def write(new: dict) -> None:
+def write(new: dict[str, int]) -> None:
     # 写入
     words = ''
     nums = ''
@@ -62,16 +71,16 @@ def write(new: dict) -> None:
         f.write(nums)
         
 def choose() -> None:
-    words = []
-    nums = []
+    words: list[str] = []
+    nums: list[int] = []
     with open('words.txt', 'r') as f:
         for i in f:
             words.append(i.strip())
     with open('nums.txt', 'r') as f:
         for i in f:
-            nums.append(i.strip())
-    dic_words = {}
-    new_words = {}
+            nums.append(int(i.strip()))
+    dic_words: dict[str, list[int]] = {}
+    new_words: dict[str, int] = {}
     for i in range(len(words)):
         try:
             dic_words[words[i]].append(nums[i])
@@ -80,7 +89,7 @@ def choose() -> None:
     
     try:
         for i in dic_words.keys():
-            nms = dic_words[i]
+            nms: list[int] = dic_words[i]
             if len(nms) == 1:
                 new_words[i] = nms[0]
                 continue
@@ -101,14 +110,14 @@ def choose() -> None:
             new_words[i] = inp
         write(new_words)
     except KeyboardInterrupt:
-        used = list(new_words.keys())
+        used: list[str] = list(new_words.keys())
         write(new_words)
-        old_words = []
-        old_nums = []
+        old_words: list[str] = []
+        old_nums: list[int] = []
         for i in dic_words.keys():
             if used.count(i) == 1:
                 continue
-            v = dic_words[i]
+            v: list[int] = dic_words[i]
             for k in v:
                 old_words.append(i)
                 old_nums.append(k)
@@ -117,4 +126,4 @@ def choose() -> None:
                 f.write(i + '\n')
         with open('nums.txt', 'a') as f:
             for i in old_nums:
-                f.write(i + '\n')
+                f.write(str(i) + '\n')
