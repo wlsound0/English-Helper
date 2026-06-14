@@ -25,12 +25,11 @@ def check() -> int:
         with open('nums.txt', 'r') as f:
             for i in f:
                 nums.append(i.strip())
-        
+                
         if len(words) != len(nums):
             return 2
-        for i in words:
-            if words.count(i) != 1:
-                return 3
+        if len(words) != len(set(words)):
+            return 3
         for i in nums:
             try:
                 a = int(i)
@@ -70,7 +69,7 @@ def write(new: dict[str, int]) -> None:
     with open('nums.txt', 'w') as f:
         f.write(nums)
         
-def choose() -> None:
+def choose() -> bool:
     words: list[str] = []
     nums: list[int] = []
     with open('words.txt', 'r') as f:
@@ -109,6 +108,7 @@ def choose() -> None:
                 break
             new_words[i] = inp
         write(new_words)
+        return False
     except KeyboardInterrupt:
         used: list[str] = list(new_words.keys())
         write(new_words)
@@ -127,3 +127,4 @@ def choose() -> None:
         with open('nums.txt', 'a') as f:
             for i in old_nums:
                 f.write(str(i) + '\n')
+        return True
