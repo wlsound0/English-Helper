@@ -1,4 +1,4 @@
-*.dict binary
-*.ifo binary
 *.dict filter=lfs diff=lfs merge=lfs -text
+*.ifo binary
+*.dict binary
 *.idx filter=lfs diff=lfs merge=lfs -text
