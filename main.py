@@ -1,48 +1,23 @@
 import append
-import read_file as rf
-import Word
+import read_file_txt as rft
+from Class import Word
 import draw_word
-import Setting
+import setting
+from Class import Setting
 
 def main() -> None:
     print('Made By 镜梦')
     interrupt = False
     
-    check: int = rf.check()
-    say = ('', '有单词文件缺失', '单词文件与统计个数文件长度不统一', '', '文件格式错误')
-    if check == 1 or check == 2 or check == 4:
-        inp = input(say[check] + '，是否初始化所有单词数据（N/Y）：')
-        if inp == 'Y':
-            rf.init()
-        else:
-            return
-    elif check == 3:
-        inp = input('单词文件中有重复值，是否进入选择模式（N/Y）：')
-        if inp == 'Y':
-            interrupt= rf.choose()
-            if interrupt:
-                return
-        else:
-            return
-    wb: Word.WordBook = rf.read()
+    con = rft.check()
+    if not con:
+        return
+    wb: Word.WordBook = rft.read()
     
-    check = Setting.check()
-    say = ('', '设置文件缺失', '设置文件格式错误', '')
-    if check == 1 or check == 2:
-        inp = input(say[check] + '，是否初始化所有设置数据（N/Y）：')
-        if inp == 'Y':
-            Setting.init()
-        else:
-            return
-    elif check == 3:
-        inp = input('设置文件有参数缺失，是否进入设置模式（N/Y）：')
-        if inp == 'Y':
-            interrupt = Setting.choose()
-            if interrupt:
-                return
-        else:
-            return
-    st: Setting.Settings = Setting.load()
+    con = setting.check()
+    if not con:
+        return
+    st: Setting.Settings = setting.read()
     
     inp = ''
     while inp != '0':
@@ -67,7 +42,7 @@ def main() -> None:
             else:
                 draw_word.main(wb, st)
         elif inp == '3':
-            interrupt = Setting.main(st)
+            interrupt = setting.main(st)
             if interrupt:
                 break
         else:

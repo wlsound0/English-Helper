@@ -1,5 +1,5 @@
-import read_file as rf
-import Word
+import read_file_txt as rft
+from Class import Word
 interrupt = False
 
 def check(word: str) -> bool:
@@ -125,10 +125,10 @@ def main(wb: Word.WordBook) -> bool:
                     continue
                 wb.dec([word])
             if interrupt:
-                rf.write(wb.to_dict())
+                rft.write(wb)
                 return True
     except KeyboardInterrupt:
-        rf.write(wb.to_dict())
+        rft.write(wb)
         return True
-    rf.write(wb.to_dict())
+    rft.write(wb)
     return False

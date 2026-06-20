@@ -7,13 +7,28 @@
 
 ```
 English/
+├── Class/    
+│   ├── Setting.py          # 设置类
+│   ├── SettingOption.py    # 设置配置类
+│	└── Word.py             # 单词、单词本类
+├── dictionary/
+│   ├── main.py             # 字典查询主函数
+│   ├── stardict-ecdict-2.4.2.dict  # 字典数据文件
+│   ├── stardict-ecdict-2.4.2.idx   # 字典索引文件
+│	└── stardict-ecdict-2.4.2.ifo   # 字典索引信息文件
+├── file/
+│   ├── storage/
+│   │   ├── Json.py         # 读取json文件
+│   │   └── Txt.py          # 读取txt文件
+│   ├── read_setting.py     # 读取设置文件
+│	└── read_wordbook_txt.py    # 读取txt版的单词本文件
 ├── append.py               # 添加单词模块
-├── read_file.py            # 读取单词文件模块
-├── main.py                 # 入口主文件
-├── Word.py                 # 单词、单词本类
-├── upgrade_log.md          # 更新日志
 ├── draw_word.py            # 抽取单词模块
-└── start.bat               # Windows启动脚本
+├── main.py                 # 入口主文件
+├── read_file_txt.py            # 读取单词文件模块
+├── setting.py              # 设置模块
+├── start.bat               # Windows启动脚本
+└── upgrade_log.md          # 更新日志
 ```
 
 ## 运行方式
@@ -38,13 +53,13 @@ English/
 1. **v0.1** - 完成基本逻辑和单个添加/减少单词
 2. **v0.2** - 批量添加/减少单词
 3. **v0.3** - 实现完全随机抽取单词考察功能
-4. **v1.0** - 个性化设置
-5. **v1.1** - bug修复、底层重写、优化框架结构
-6. **v1.2** - 使用SQL库进行单词存储（保留txt格式存储功能）
+4. **v0.4** - 个性化设置
+5. **v1.0** - bug修复、底层重写、优化框架结构
+6. **v1.1** - 使用SQL库进行单词存储（保留txt格式存储功能）
 
 ## 实际开发日志
 
 1. **v0.1** - 完成基本逻辑和单个添加/减少单词
 2. **v0.2** - 批量添加/减少单词
 3. **v0.3** - 实现完全随机抽取单词与根据单词出现次数调整权重抽取单词功能
-4. **v1.0** - 实现个性化设置
+4. **v0.4** - 实现个性化设置

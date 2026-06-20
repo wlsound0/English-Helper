@@ -1,5 +1,6 @@
-import Word
-import Setting
+from Class import Word
+from Class import Setting
+import random
 
 def ch_mode() -> int:
     while True:
