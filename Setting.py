@@ -22,6 +22,13 @@ st = [
             'sure': '每次进入抽取模式时询问', 
         }
     ), 
+    ST.SettingOption(
+        'use_dict', '字典模式', {
+            'true': '开', 
+            'false': '关', 
+            'sure': '每次进入抽取模式时询问', 
+        }
+    ), 
 ]
 
 def read() -> Setting.Settings:
@@ -45,7 +52,7 @@ def choose() -> bool:
         while True:
             print(st[i].name + '：')
             for k in range(len(st[i].choises)):
-                print(str(k+1) + '. ' + keys(st[i].choises)[k])
+                print(str(k+1) + '. ' + st[i].choises[keys(st[i].choises)[k]])
             try:
                 inp = input('>>>')
             except KeyboardInterrupt:

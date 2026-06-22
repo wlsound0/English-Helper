@@ -4,7 +4,8 @@ import json
 def init() -> None:
     new: dict = {
         'file_mode': 'txt', 
-        'draw_mode': 'sure'
+        'draw_mode': 'sure', 
+        'use_dict': 'sure'
     }
     Json.write('settings.json', new)
     
@@ -24,7 +25,7 @@ def check() -> int:
     '''
     try:
         data = read()
-        name = ('file_mode', 'draw_mode')
+        name = ('file_mode', 'draw_mode', 'use_dict')
         for k in range(len(name)):
             a = data[name[k]]
     except FileNotFoundError:
