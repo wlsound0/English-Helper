@@ -1,4 +1,5 @@
 from pystardict import Dictionary
+import os
 
 dic: Dictionary
 loaded: bool = False
@@ -8,7 +9,9 @@ def load() -> bool:
     global loaded
     print('正在读取字典...')
     try:
-        dic = Dictionary('stardict-ecdict-2.4.2')
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        dict_path = os.path.join(script_dir, 'stardict-ecdict-2.4.2')
+        dic = Dictionary(dict_path)
         loaded = True
     except FileNotFoundError:
         return False
@@ -19,7 +22,15 @@ def check() -> bool:
 
 def ans(inp: str) -> None:
     global dic
-    try:
-        print(dic[inp])
-    except KeyError:
-        print('（该单词在字典中未找到）')
+    re = dic[inp]
+    if re:
+        print(re)
+    else:
+        print('（该单词/词组不在词典中）')
+        
+if __name__ == '__main__':
+    load()
+    ans('hello')
+    ans('world')
+    ans('apple')
+    ans('aaaaappplee')
