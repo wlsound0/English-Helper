@@ -5,7 +5,7 @@ def init() -> None:
     Txt.write('nums.txt', '')
     
 def read() -> list:
-    # 读取
+    '''读取'''
     words: list[str] = []
     with open('words.txt', 'r') as f:
         for word in f:
@@ -18,7 +18,7 @@ def read() -> list:
 
 
 def write(new: dict[str, int]) -> None:
-    # 写入
+    '''写入'''
     words = ''
     nums = ''
     for i in new.keys():
@@ -30,7 +30,7 @@ def write(new: dict[str, int]) -> None:
     Txt.write('nums.txt', nums)
 
 def append(new: dict[str, int]) -> None:
-    # 追加
+    '''追加'''
     words = ''
     nums = ''
     for i in new.keys():

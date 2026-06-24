@@ -65,7 +65,7 @@ def choose() -> bool:
         return True
 
 def check() -> bool:
-    # 返回是否可以继续读取文件
+    '''返回是否可以继续读取文件'''
     check: int = rwt.check()
     say = ('', '有单词文件缺失', '单词文件与统计个数文件长度不统一', '', '文件格式错误')
     if check == 1 or check == 2 or check == 4:

@@ -8,13 +8,13 @@ def check(word: str) -> bool:
     return False
 
 def re_all(wb: Word.WordBook) -> None:
-    # 返回所有单词
+    '''输出所有单词'''
     words: dict = wb.to_dict()
     for word, num in sorted(words.items(), key=lambda item: item[1], reverse=True):
         print('        ' + word + ': ' + str(num))
 
 def re_some(wb: Word.WordBook, x: int) -> None:
-    # 返回频率为前x的单词
+    '''输出频率为前x的单词'''
     i = 0
     words: dict = wb.to_dict()
     for word, num in sorted(words.items(), key=lambda item: item[1], reverse=True):
@@ -24,13 +24,16 @@ def re_some(wb: Word.WordBook, x: int) -> None:
             return
 
 def show(wb: Word.WordBook) -> None:
+    '''展示主界面'''
     print('###################################\n')
     re_all(wb)
-    print('\n输入Exit退出，输入+++进入批量添加模式，输入---进入批量减少模式。')
+    print('\n输入Exit退出。')
+    print('输入+++进入批量添加模式，输入---进入批量减少模式。')
     print('输入其他单词表示某单词数量+1，若需要某单词数量-1则在单词前输入减号。')
+    print('在单词前加英文问号，可以查询该单词的次数。')
     
 def multyap(wb: Word.WordBook) -> Word.WordBook:
-    # 批量添加
+    '''批量添加'''
     inp = ''
     try:
         while inp != 'Exit':
@@ -61,7 +64,7 @@ def multyap(wb: Word.WordBook) -> Word.WordBook:
     return wb
             
 def multydl(wb: Word.WordBook) -> Word.WordBook:
-    # 批量减少
+    '''批量减少'''
     inp = ''
     try:
         while inp != 'Exit':
@@ -116,8 +119,15 @@ def main(wb: Word.WordBook) -> bool:
                 wb = multyap(wb)
             elif inp == '---':
                 wb = multydl(wb)
-            elif inp[0] != '-':
+            elif inp[0] != '-' and inp[0] != '?':
                 wb.add([inp])
+            elif inp[0] == '?':
+                word = inp[1:]
+                if check(word):
+                    input('错误输入，按Enter键后重新输入...')
+                    continue
+                print(wb.query(word))
+                input('按Enter键后继续...')
             else:
                 word = inp[1:]
                 if check(word):
