@@ -12,7 +12,10 @@ class WordBook:
         self.all_fre = 0               # 所有单词出现次数相加
         
     def push(self, word: Word) -> None:
-        '''直接加入已有的Word类'''
+        '''
+        直接加入已有的Word类
+        注：all_fre会自己更新，无需额外更新。
+        '''
         self.index[word.word] = len(self.words)
         self.words.append(word)
         self.all_fre += word.num
@@ -43,7 +46,7 @@ class WordBook:
                 self.push(new_word)
             else:
                 self.words[ind].num += 1
-            self.all_fre += 1
+                self.all_fre += 1
     
     def dec(self, words: list[str]) -> list[str]:
         '''
@@ -80,11 +83,11 @@ class WordBook:
     
     def rd_use(self) -> Word:
         '''根据出现次数调整权重地产生单词'''
-        randint = random.randint(1, self.all_fre)
+        rt = random.randint(1, self.all_fre)
         index = -1
-        while randint > 0:
+        while rt > 0:
             index += 1
-            randint -= self.words[index].num
+            rt -= self.words[index].num
         return self.words[index]
     
     def query(self, what: str) -> int:
