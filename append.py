@@ -19,7 +19,7 @@ def re_some(wb: Word.WordBook, x: int) -> None:
     words: dict = wb.to_dict()
     for word, num in sorted(words.items(), key=lambda item: item[1], reverse=True):
         i += 1
-        print(str(word) + ': ' + str(num))
+        print('        ' + str(word) + ': ' + str(num))
         if i == x or i == len(words):
             return
 
