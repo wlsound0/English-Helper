@@ -28,7 +28,7 @@ def show(wb: Word.WordBook) -> None:
     print('###################################\n')
     re_some(wb, 25)
     if len(wb.words) > 25:
-        print('已省略剩余的' + str(len(wb.words) - 25) + '个单词')
+        print('\n已省略剩余的' + str(len(wb.words) - 25) + '个单词')
     print('\n输入Exit退出。')
     print('输入+++进入批量添加模式，输入---进入批量减少模式。')
     print('输入其他单词表示某单词数量+1，若需要某单词数量-1则在单词前输入减号。')
